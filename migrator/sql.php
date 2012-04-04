@@ -22,9 +22,11 @@ class SQL {
 		$this->connection = $this->connect();
 	}
 	
-	/**
-	 * Соединяемся с базой, устанавливаем переменную $connection.
-	 */
+    /**
+     * Соединяемся с базой, устанавливаем переменную $connection.
+     * 
+     * @return PDO
+     */
 	private function connect() {
 		
 		$config = Migrator::get_config();
