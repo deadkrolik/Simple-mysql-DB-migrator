@@ -10,7 +10,7 @@ class Config {
 	private $data;
 	
 	/**
-	 * @var type Имя файла конфига
+	 * @var string Имя файла конфига
 	 */
 	private $config_file;
 
