@@ -8,7 +8,7 @@ class StageCreator {
 	 * Создание файла миграции с указанным комментарием
 	 * 
 	 * @param string $stage_name Комментарий миграции
-	 * @return type В случае успеха - полный путь к файлу миграции, в случае неудачи - false
+	 * @return mixed В случае успеха - полный путь к файлу миграции, в случае неудачи - false
 	 */
 	public static function generate_stage($stage_name) {
 

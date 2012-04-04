@@ -17,7 +17,7 @@ class Migrator {
 	private static $config = NULL;
 	
 	/**
-	 * @var object Соединение с базой
+	 * @var SQL Соединение с базой
 	 */
 	private static $connection = NULL;
 	
@@ -81,7 +81,7 @@ class Migrator {
 	/**
 	 * Возврат ссылки на объект конфига. Если он не был создан - исключение
 	 * 
-	 * @return object Объект класса Config
+	 * @return Config Объект класса Config
 	 */
 	public static function get_config() {
 		
@@ -96,7 +96,7 @@ class Migrator {
 	/**
 	 * Возврат ссылки на объект соединения с базой
 	 * 
-	 * @return object Объект класса SQL
+	 * @return SQL Объект класса SQL
 	 */
 	public static function get_connection() {
 		
