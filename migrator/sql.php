@@ -33,7 +33,7 @@ class SQL {
 		
 		try {
 			
-			$connection = new \PDO('mysql:host='.$config->get('database','host').';dbname='.$config->get('database','db').';charset='.$config->get('database','charset').'', $config->get('database','user'), $config->get('database','password'));
+			$connection = new PDO('mysql:host='.$config->get('database','host').';dbname='.$config->get('database','db').';charset='.$config->get('database','charset').'', $config->get('database','user'), $config->get('database','password'));
 			
 		} catch (Exception $e) {
 			

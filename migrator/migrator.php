@@ -12,7 +12,7 @@ require_once('config.php');
 class Migrator {
 
 	/**
-	 * @var object Объект конфига
+	 * @var Config Объект конфига
 	 */
 	private static $config = NULL;
 	

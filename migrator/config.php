@@ -15,12 +15,21 @@ class Config {
 	private $config_file;
 
 	/**
+	 * Имя конфига по умолчанию, если он прямо не задан в строке
+	 */
+	const DEFAULT_CONFIG = 'local';
+	
+	/**
 	 * Инициализация 
 	 * 
 	 * @param string $config_name Имя файла конфига
 	 */
 	public function __construct($config_name) {
 		
+		//если пуст - пытамся найти конфиг по умолчанию
+		$config_name = $this->find_config_if_empty($config_name);
+		
+		//разбор конфига и сохранение его во внутреннюю переменную
 		$this->config_file = $config_name;
 		$this->data        = $this->parse_config($config_name);
 	}
@@ -64,10 +73,36 @@ class Config {
 	}
 	
 	/**
-	 * Парсинг указанного файла конфига
+	 * Пытается найти файл конфигурации в директории config в случае если он не задан.
+	 * Если там всего один ini-файл - возвращает его. В остальных случаях - 
+	 * возвращает конфиг по умолчанию "local"
+	 * 
+	 * @param string $config_name Имя файла конфигурации
+	 */
+	private function find_config_if_empty($config_name) {
+		
+		//не пустой не трогаем
+		if ($config_name) {
+			
+			return $config_name;
+		}
+		
+		//ищем
+		$configs = glob(Migrator::get_base_dir().'/config/*.ini');
+		
+		//если он один - возвращаем его имя без расширения
+		if (count($configs) == 1){
+			
+			return str_replace('.ini', '', basename($configs[0]));
+		}
+
+		//по умолчанию
+		return Config::DEFAULT_CONFIG;
+	}
+	/**
+	 * Парсинг указанного файла конфига. В случае ошибки выдает exception.
 	 * 
 	 * @param string $config_name Имя конфига без ini на конце
-	 * 
 	 * @return array Распарсенный массив 
 	 */
 	private function parse_config($config_name) {
@@ -78,7 +113,11 @@ class Config {
 			Migrator::exception('Файл конфига не существует ('.$config_name.'.ini)');
 		}
 		
-		$ini_parsed = parse_ini_file($config_file, true);
+		$ini_parsed = @parse_ini_file($config_file, true);
+		if ($ini_parsed === false) {
+			
+			Migrator::exception('Ошибка парсинга файла конфигурации');
+		}
 		
 		return $ini_parsed;
 	}
