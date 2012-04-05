@@ -22,6 +22,17 @@ class Migrator {
 	private static $connection = NULL;
 	
 	/**
+	 * В конструкторе проверяем наличие загруженных расширений pdo
+	 */
+	public function __construct() {
+		
+		if (!extension_loaded('PDO') || !extension_loaded('pdo_mysql')) {
+			
+			Migrator::exception("Расширение PDO для работы с MySQL отсутствует");
+		}
+	}
+	
+	/**
 	 * Исполнение какой-либо команды
 	 * 
 	 * @param string $command_line Командная строка, разделенная пробелами
