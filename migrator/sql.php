@@ -145,10 +145,17 @@ class SQL {
 	
 	/**
 	 * Проверка существования служебной таблицы для учета истории миграций и если
-	 * ее нет - создание таковой.
+	 * ее нет - создание таковой. И установка кодировки соединения.
 	 */
-	public function check_table_exists() {
+	public function init() {
 		
+		//установка кодировки в DSN не всегда работает
+		$chr_result = Migrator::get_connection()->exec('SET NAMES '.Migrator::get_config()->get('database','charset'));
+		if (!$chr_result) {
+			
+			Migrator::exception('Ошибка смены кодировки: '. $this->get_error());
+		}
+
 		//имя служебной таблички с данными о миграциях
 		$table_name = Migrator::get_config()->get('options', 'table');
 		

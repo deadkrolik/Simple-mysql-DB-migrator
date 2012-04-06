@@ -139,7 +139,7 @@ class Migrator {
 		Migrator::$config = new Config($conf_name);
 
 		Migrator::$connection = new SQL();
-		Migrator::$connection->check_table_exists();
+		Migrator::$connection->init();
 	}
 
 	/**
