@@ -14,6 +14,10 @@ class WebMigrator {
 	
 		//ищем где наш скрипт находится
 		$m_dir = $this->find_migrator_dir(10);
+		if (!$m_dir) {
+			
+			WebMigrator::exception('Путь к скрипту миграции не найден');
+		}
 		
 		//проверяем возможность доступа
 		$real_password = file_get_contents($m_dir.'/config/password');
@@ -51,10 +55,10 @@ class WebMigrator {
 		while($try_count--) {
 
 			//ищем стандартные папки нашего скрипта
-			if (is_dir($path.'/config') && is_dir($path.'/db_changes') && is_dir($path.'/migrator')) {
+			if (is_dir($path.'/migrator/config') && is_dir($path.'/migrator/db_changes') && is_dir($path.'/migrator/migrator')) {
 				
 				//мы нашли, уходим отсюда
-				return $path;
+				return $path.'/migrator';
 			}
 
 			$path = dirname($path);
