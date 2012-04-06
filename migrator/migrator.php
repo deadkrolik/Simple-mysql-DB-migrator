@@ -57,6 +57,7 @@ class Migrator {
 		
 		$arguments = explode(' ',$command_line);
 
+		//исполнение или предпросмотр миграций
 		if (in_array($this->get($arguments, 0), array('up', 'preview'))) {
 			
 			//данные для коннекта к базе
@@ -72,6 +73,7 @@ class Migrator {
 			return;
 		}
 		
+		//создание миграции
 		if ($this->get($arguments, 0) == 'create') {
 			
 			//создаем файл и больше ничего не делаем
@@ -85,6 +87,18 @@ class Migrator {
 				
 				Migrator::log("Ошибка создания файла миграции");
 			}
+			return;
+		}
+		
+		//просмотр уже исполненных миграций
+		if ($this->get($arguments, 0) == 'show_executed') {
+			
+			//конфиг
+			$this->init($this->get($arguments, 1));
+
+			$stage_executor = new StageExecutor();
+			$stage_executor->show_executed();
+			
 			return;
 		}
 

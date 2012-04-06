@@ -9,3 +9,5 @@
 	Создание файла миграции:
 	php migrator.php create "ОПИСАНИЕ МИГРАЦИИ"
 
+	Просмотр выполненных миграций
+	php migrator.php show_executed КОНФИГ

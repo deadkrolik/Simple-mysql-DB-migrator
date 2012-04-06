@@ -216,4 +216,18 @@ class StageExecutor {
 		
 		return $return;
 	}
+	
+	/**
+	 * Показывает уже исполненные команды миграций
+	 */
+	public function show_executed() {
+		
+		$commands = $this->get_db_migrations_list();
+		
+		Migrator::log("[    дата запуска   ] - [файл миграции]");
+		foreach($commands as $cmd) {
+			
+			Migrator::log("[{$cmd->created_at}] - {$cmd->name}");
+		}
+	}
 }
