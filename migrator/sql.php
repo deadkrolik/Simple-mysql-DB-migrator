@@ -161,7 +161,7 @@ class SQL {
 		
 		//проверяем существование нашей внутренней таблички с данными о миграциях
 		$existing_tables = Migrator::get_connection()->get_list("SHOW TABLES LIKE '{$table_name}'");
-		if (count($existing_tables)) {
+		if (!count($existing_tables)) {
 			
 			$exec_result = Migrator::get_connection()->exec("
 				CREATE TABLE IF NOT EXISTS `{$table_name}` (
