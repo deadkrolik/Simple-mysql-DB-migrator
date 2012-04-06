@@ -1,0 +1,7 @@
+<form action='index.php' method='POST'>
+
+Command: <input type='text' size='50' name='command'>
+Password: <input type='text' size='32' name='password'>
+<input type='submit' value='Go'>
+
+</form>

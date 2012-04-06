@@ -22,6 +22,11 @@ class Migrator {
 	private static $connection = NULL;
 	
 	/**
+	 * @var string Метод, который надо выполнять при появлении исключения
+	 */
+	public static $exception_method = NULL;
+	
+	/**
 	 * В конструкторе проверяем наличие загруженных расширений pdo
 	 */
 	public function __construct() {
@@ -30,6 +35,17 @@ class Migrator {
 			
 			Migrator::exception("Расширение PDO для работы с MySQL отсутствует");
 		}
+	}
+	
+	/**
+	 * Иногда мы не хотим, что бы скрипт умирал при ошибке. Тут можно задать метод
+	 * который он будет вызывать при появлении исключения.
+	 * 
+	 * @param string $method 
+	 */
+	public static function set_exception_method($method) {
+		
+		Migrator::$exception_method = $method;
 	}
 	
 	/**
@@ -149,8 +165,16 @@ class Migrator {
 	 */
 	public static function exception($error) {
 		
-		echo Migrator::get_colored('[ошибка]', 31)." {$error}\n";
-		exit();
+		if (Migrator::$exception_method) {
+			
+			list($class, $func) = explode('::', Migrator::$exception_method);
+			$class::$func($error);
+		}
+		else {
+			
+			echo Migrator::get_colored('[ошибка]', 31)." {$error}\n";
+			exit();
+		}
 	}
 	
 	/**
