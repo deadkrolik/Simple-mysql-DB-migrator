@@ -187,7 +187,7 @@ class Migrator {
 		else {
 			
 			echo Migrator::get_colored('[ошибка]', 31)." {$error}\n";
-			exit();
+			exit(1);
 		}
 	}
 	
@@ -229,6 +229,10 @@ class Migrator {
 			if (PHP_OS == 'Linux' || PHP_OS == 'FreeBSD') {
 
 				$return = "\033[0;{$color}m{$string}\033[0;m";
+			}
+			else {
+				
+				$return = $string;
 			}
 		}
 
