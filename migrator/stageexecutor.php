@@ -86,7 +86,8 @@ class StageExecutor {
 		if (count($mstage->up()) != count($mstage->down())) {
 			
 			Migrator::error("   число команд в up() не совпадает с таковым в down(), обработка файла невозможна");
-			return 0;
+			//прерываем миграцию
+			return false;
 		}
 		
 		//получение sql запроса от конкретного объекта с данными

@@ -179,6 +179,10 @@ class Migrator {
 	 */
 	public static function exception($error) {
 		
+		if (strpos(PHP_OS,'WIN')!==false) {
+			$error = iconv('UTF-8','cp866',$error);
+		}
+		
 		if (Migrator::$exception_method) {
 			
 			list($class, $func) = explode('::', Migrator::$exception_method);
@@ -198,6 +202,10 @@ class Migrator {
 	 */
 	public static function log($message) {
 	
+		if (strpos(PHP_OS,'WIN')!==false) {
+			$message = iconv('UTF-8','cp866',$message);
+		}
+		
 		echo Migrator::get_colored('[действие]', 32)." {$message}\n";
 	}
 	
@@ -208,6 +216,10 @@ class Migrator {
 	 */
 	public static function error($message) {
 	
+		if (strpos(PHP_OS,'WIN')!==false) {
+			$message = iconv('UTF-8','cp866',$message);
+		}
+		
 		echo Migrator::get_colored('[ ошибка ]', 31)." {$message}\n";
 	}
 	
@@ -220,6 +232,10 @@ class Migrator {
 	 * @return string Измененная строка
 	 */
 	public static function get_colored($string, $color) {
+
+		if (strpos(PHP_OS,'WIN')!==false) {
+			$string = iconv('UTF-8','cp866',$string);
+		}
 		
 		$return = $string;
 		
@@ -229,10 +245,6 @@ class Migrator {
 			if (PHP_OS == 'Linux' || PHP_OS == 'FreeBSD') {
 
 				$return = "\033[0;{$color}m{$string}\033[0;m";
-			}
-			else {
-				
-				$return = $string;
 			}
 		}
 

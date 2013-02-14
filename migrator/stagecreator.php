@@ -12,6 +12,10 @@ class StageCreator {
 	 */
 	public static function generate_stage($stage_name) {
 
+		if (strpos(PHP_OS,'WIN')!==false) {
+			$stage_name = iconv('CP1251','UTF-8',$stage_name);
+		}
+		
 		//более-менее уникальное число
 		$timestamp = time();
 

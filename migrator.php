@@ -1,4 +1,6 @@
 <?php
+( ini_get( 'date.timezone' ) != '' ) ? : date_default_timezone_set( 'Europe/Moscow' );
+
 //класс обработчик изменений
 require_once('migrator/migrator.php');
 
