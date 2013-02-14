@@ -45,7 +45,7 @@ class StageCreator {
 		}
 		
 		//замена переменных в файле-шаблоне одной миграции
-		$stage_template = file_get_contents(Migrator::get_base_dir().'/migrator/data/stage.tpl');
+		$stage_template = file_get_contents(Migrator::get_base_dir().'/cmigrator/data/stage.tpl');
 		$stage_template = str_replace(array(
 			
 			'StageComment',

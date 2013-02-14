@@ -2,7 +2,7 @@
 ( ini_get( 'date.timezone' ) != '' ) ? : date_default_timezone_set( 'Europe/Moscow' );
 
 //класс обработчик изменений
-require_once('migrator/migrator.php');
+require_once('cmigrator/migrator.php');
 
 //в командной строке нулевой параметр это имя файла
 if ($argv[0] == basename(__FILE__)) {

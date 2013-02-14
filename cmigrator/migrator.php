@@ -103,7 +103,7 @@ class Migrator {
 		}
 
 		//показываем что и как
-		echo file_get_contents(Migrator::get_base_dir().'/migrator/data/usage.txt');		
+		echo file_get_contents(Migrator::get_base_dir().'/cmigrator/data/usage.txt');		
 	}
 	
 	/**
