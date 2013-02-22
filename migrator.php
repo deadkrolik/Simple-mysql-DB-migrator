@@ -5,7 +5,7 @@
 require_once('cmigrator/migrator.php');
 
 //в командной строке нулевой параметр это имя файла
-if ($argv[0] == basename(__FILE__)) {
+if (basename($argv[0]) == basename(__FILE__)) {
 	
 	unset($argv[0]);
 }
