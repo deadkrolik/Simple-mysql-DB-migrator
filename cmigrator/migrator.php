@@ -27,13 +27,12 @@ class Migrator {
 	public static $exception_method = NULL;
 	
 	/**
-	 * В конструкторе проверяем наличие загруженных расширений pdo
+	 * В конструкторе проверяем наличие загруженного расширения PDO
 	 */
 	public function __construct() {
 		
-		if (!extension_loaded('PDO') || !extension_loaded('pdo_mysql')) {
-			
-			Migrator::exception("Расширение PDO для работы с MySQL отсутствует");
+		if (!extension_loaded('PDO')) {
+			Migrator::exception("Расширение PDO для работы с БД отсутствует");
 		}
 	}
 	
