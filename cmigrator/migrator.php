@@ -101,8 +101,12 @@ class Migrator {
 			return;
 		}
 
-		//показываем что и как
-		echo file_get_contents(Migrator::get_base_dir().'/cmigrator/data/usage.txt');		
+		//показываем помощь
+		$help = file_get_contents(Migrator::get_base_dir().'/cmigrator/data/usage.txt');
+		if (strpos(PHP_OS,'WIN')!==false) {
+			$help = iconv('UTF-8','cp866',$help);
+		}
+		echo $help;
 	}
 	
 	/**
